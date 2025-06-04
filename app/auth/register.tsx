@@ -13,20 +13,25 @@ const Register = () => {
     const router = useRouter();
     const handleRegister = async () => {
       try {
-        const response = await axios.post('http://localhost:8000/api/register', {
+        const response = await axios.post('http://localhost:8000/api/auth/register', {
           name,
-        email,
-        password,
+          email,
+          password,
       });
       Alert.alert('Sucesso', 'Cadastro realizado com sucesso! Redirecionando para a home...');
       setToken(response.data.access_token);
       setIsRegistering(false);
+
+      if(response.data.access_token) {
+        router.replace('/(tabs)');
+      }
     } catch (error) {
       Alert.alert('Erro', error.response?.data?.message || 'Erro ao cadastrar');
     }
   };
 
   return (
+    <>
     <View style={styles.container}>
           <View style={styles.logoContainer}>
             <View style={styles.logoCircle}>
@@ -79,6 +84,7 @@ const Register = () => {
             </TouchableOpacity>
           </View>
         </View>
+        </>
   );
 };
 

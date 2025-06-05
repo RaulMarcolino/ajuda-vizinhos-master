@@ -20,6 +20,7 @@ const Index = () => {
     setModalVisible(true);
   };
 
+  
   const handleCloseModal = () => {
     setModalVisible(false);
   };

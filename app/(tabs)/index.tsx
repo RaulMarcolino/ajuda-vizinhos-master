@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Button, TouchableOpacity, Modal, TextInput, ScrollView, StyleSheet, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-const App = () => {
+const Index = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [helpRequests, setHelpRequests] = useState([
     { name: 'Maria Silva', distance: '1.2 km', urgent: true, title: 'Preciso de remédios para minha mãe', description: 'Minha mãe está com febre e não posso sair de casa agora. Alguém pode buscar remédios na farmácia do bairro?' },
@@ -363,4 +363,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Index;

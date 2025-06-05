@@ -11,24 +11,29 @@ const Register = () => {
     const [isRegistering, setIsRegistering] = useState(false);
 
     const router = useRouter();
+    
     const handleRegister = async () => {
+      setIsRegistering(true); // Adicione isso aqui
       try {
         const response = await axios.post('http://localhost:8000/api/auth/register', {
           name,
           email,
           password,
-      });
-      Alert.alert('Sucesso', 'Cadastro realizado com sucesso! Redirecionando para a home...');
-      setToken(response.data.access_token);
-      setIsRegistering(false);
-
-      if(response.data.access_token) {
-        router.replace('/(tabs)');
+        });
+    
+        Alert.alert('Sucesso', 'Cadastro realizado com sucesso! Redirecionando para a home...');
+        setToken(response.data.access_token); // remova as aspas para acessar o token real
+    
+        if (response?.data?.user?.id) {
+          router.replace('/(tabs)/'); // Certifique-se que isso está apontando para sua tela principal
+        }
+      } catch (error) {
+        Alert.alert('Erro', error.response?.data?.message || 'Erro ao cadastrar');
+      } finally {
+        setIsRegistering(false); // Sempre desativa o loading, mesmo se der erro
       }
-    } catch (error) {
-      Alert.alert('Erro', error.response?.data?.message || 'Erro ao cadastrar');
-    }
-  };
+    };
+    
 
   return (
     <>
